@@ -2,11 +2,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed;
+    Rigidbody2D rigidbody2d;
+
+    public float speed = 10f;
+    public float jumpforce = 8f; 
+
 
     void Start()
     {
-        
+        rigidbody2d = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -25,6 +29,13 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             transform.Translate(speed * Time.deltaTime * Vector2.right);
+        }
+
+        //GetKeyDown - это метод, который можно использовать для определения, была ли нажата клавиша на клавиатуре в данный момент времени.
+        //можем настроить гравитацию для нормального прыжка
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, jumpforce);
         }
     }
 }
