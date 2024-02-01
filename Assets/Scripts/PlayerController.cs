@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody2D rigidbody2d;
-
     public float speed = 10f;
     public float jumpforce = 8f;
 
+    Rigidbody2D rigidbody2d;
     public Animator animator;
+    public SpriteRenderer sprite;
 
-void Start()
+    void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
     }
@@ -27,10 +27,12 @@ void Start()
         {
             if (Input.GetKey(KeyCode.A))
             {
+                sprite.flipX = true;
                 transform.Translate(speed * Time.deltaTime * Vector2.left);
             }
             else if (Input.GetKey(KeyCode.D))
             {
+                sprite.flipX = false;
                 transform.Translate(speed * Time.deltaTime * Vector2.right);
             }
         }
