@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyMovie : MonoBehaviour
+public class EnemyControllerVirtualGuy : MonoBehaviour
 {
     SpriteRenderer spriteRenderer; //создаем компонент поворота
 
