@@ -2,53 +2,55 @@ using UnityEngine;
 
 public class EnemyControllerPinkMan : MonoBehaviour
 {
+    [SerializeField] private float _speed = 5f;
+
     private Animator _animator;
-    private SpriteRenderer _spriteRenderer;
-    private bool _isFacingRight = true;
 
-    [SerializeField] private float _raycastLenghts = 1.2f;
-    [SerializeField] private Vector2 _offset;
-
-    private float _speed = 2f;
+    private bool _canMove = false;
+    private float _timer = 0f;
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
 
-        PlayIdleAnimation(); // Запустить анимацию Idle сразу при старте
-        InvokeRepeating(nameof(CheckForPlatformAndFlip), 0f, 2f); // Запустить проверку и изменение направления
+        _animator.Play("Idle"); // Запустить анимацию Idle сразу при старте
     }
 
-    private void PlayIdleAnimation()
+    private void Update()
     {
-        // Запуск анимации Idle
-        _animator.Play("EnemyPinkMan Idle");
-        //_animator.SetTrigger("EnemyPinkMan Idle");
-    }
+        _timer += Time.deltaTime;
 
-    private void CheckForPlatformAndFlip()
-    {
-        // Проверка наличия платформы перед движением
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down + _offset, _raycastLenghts, LayerMask.GetMask("Ground"));
-
-        if (hit.collider == null)
+        // Проверка, прошло ли уже 3 секунды
+        if (_canMove)
         {
-            // Если нет платформы, просто меняем направление через flip
-            Flip();
+            MoveEnemy();
+        }
+        else if (_timer >= 3f)
+        {
+            _canMove = true;
+            _animator.Play("Run");
         }
     }
 
-    private void Flip()
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        // Инвертировать направление
-        _isFacingRight = !_isFacingRight;
-        // Изменить направление спрайта через flip
-        _spriteRenderer.flipX = !_spriteRenderer.flipX;
+        // Проверка на выход из коллайдера
+        if (collision.CompareTag("patrulBox"))
+        {
+            FlipDirection();
+        }
     }
 
-    private void Move()
+    private void MoveEnemy()
     {
-        transform.position = Vector3.MoveTowards(transform.position, Vector3.right * _speed, Time.deltaTime);
+        // Перемещение врага к следующей точке
+        transform.Translate(_speed * Time.deltaTime * Vector3.right);
+    }
+
+    private void FlipDirection()
+    {
+        var currentRotation = transform.rotation; // Получаем текущую ориентацию объекта
+        currentRotation *= Quaternion.Euler(0, 180, 0); // Поворот на 180 градусов вокруг вертикальной оси Y
+        transform.rotation = currentRotation; // Применяем новую ориентацию к объекту
     }
 }
