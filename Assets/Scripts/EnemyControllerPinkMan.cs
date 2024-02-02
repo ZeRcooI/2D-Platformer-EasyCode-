@@ -20,12 +20,12 @@ public class EnemyControllerPinkMan : MonoBehaviour
     {
         _timer += Time.deltaTime;
 
-        // Проверка, прошло ли уже 3 секунды
+        // Проверка, прошло ли уже 2 секунды
         if (_canMove)
         {
             MoveEnemy();
         }
-        else if (_timer >= 3f)
+        else if (_timer >= 2f)
         {
             _canMove = true;
             _animator.Play("Run");
