@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,6 +9,8 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rigidbody2d;
     public Animator animator;
     public SpriteRenderer sprite;
+
+    [SerializeField] private GameObject _restartButton;
 
     void Start()
     {
@@ -67,6 +70,14 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, jumpforce);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (_restartButton != null)
+        {
+            _restartButton.SetActive(true);
         }
     }
 }
