@@ -92,7 +92,8 @@ public class PlayerController : MonoBehaviour
     //        _restartButton.SetActive(true);
     //    }
     //}
-    private void OnDisable()
+
+    public void ActivateRestartButton()
     {
         if (_restartButton != null)
         {
