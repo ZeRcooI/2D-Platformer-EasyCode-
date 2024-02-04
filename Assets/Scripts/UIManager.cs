@@ -5,7 +5,7 @@ public class UIManager : MonoBehaviour
 {
     public void RestartLevel()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 
     public void ExitGame() //Этот метод завершает выполнение приложения. Обращаем внимание, что в режиме редактора Unity или в веб-плеере, эта команда может не работать. 
