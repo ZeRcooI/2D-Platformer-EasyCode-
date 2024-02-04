@@ -4,10 +4,10 @@ public class EnemyControllerVirtualGuy : MonoBehaviour
 {
     SpriteRenderer spriteRenderer; //создаем компонент поворота
 
-    public float speed = 2f;
-    public float timer = 0; // переменная таймера, которая используется для отсчета времени движения в определенном направлении.
-    public float moveDuration = 5; // переменная, определяющая длительность времени, в течение которой объект будет двигаться в одном направлении, прежде чем изменить направление.
-    public Vector2 direction = Vector2.right; // переменная, которая задает начальное направление движения объекта. В данном случае, объект будет двигаться вправо при старте.
+    [SerializeField] private float _speed = 2f;
+    [SerializeField] private float _timer = 0; // переменная таймера, которая используется для отсчета времени движения в определенном направлении.
+    [SerializeField] private float _moveDuration = 5; // переменная, определяющая длительность времени, в течение которой объект будет двигаться в одном направлении, прежде чем изменить направление.
+    [SerializeField] private Vector2 _direction = Vector2.right; // переменная, которая задает начальное направление движения объекта. В данном случае, объект будет двигаться вправо при старте.
 
     private void Start()
     {
@@ -16,14 +16,14 @@ public class EnemyControllerVirtualGuy : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(direction * speed * Time.deltaTime);
+        transform.Translate(_direction * _speed * Time.deltaTime);
 
-        timer = timer + Time.deltaTime; //Таймер увеличивается на прошедшее время.
+        _timer = _timer + Time.deltaTime; //Таймер увеличивается на прошедшее время.
 
-        if (timer >= moveDuration) //Проверяется, достигнута ли заданная длительность движения в одном направлении.
+        if (_timer >= _moveDuration) //Проверяется, достигнута ли заданная длительность движения в одном направлении.
         {
-            direction = direction * -1; //Если условие выполняется, то направление(direction) изменяется на противоположное(умножение на - 1).
-            timer = 0; //Таймер сбрасывается до нуля, начиная отсчет времени для следующего движения в новом направлении.
+            _direction = _direction * -1; //Если условие выполняется, то направление(direction) изменяется на противоположное(умножение на - 1).
+            _timer = 0; //Таймер сбрасывается до нуля, начиная отсчет времени для следующего движения в новом направлении.
 
             //Этот код использует компонент SpriteRenderer, чтобы изменить свойство flipX и перевернуть персонажа по горизонтали.
             if (spriteRenderer != null)

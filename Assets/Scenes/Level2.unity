@@ -708,7 +708,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2.5
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -732,10 +732,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 532d24e5506dbf24187c36f7e3776c79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
-  jumpforce: 15
-  animator: {fileID: 1019398173}
-  sprite: {fileID: 1019398168}
+  _speed: 8
+  _jumpforce: 16
+  _animator: {fileID: 1019398173}
+  _sprite: {fileID: 1019398168}
   _restartButton: {fileID: 1226714366}
 --- !u!95 &1019398173
 Animator:
@@ -988,8 +988,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1714484590}
   - {fileID: 1722861168}
+  - {fileID: 1714484590}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1226714366
@@ -6656,10 +6656,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 616cae024cda13046ab3a5e2be852106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  timer: 0
-  moveDuration: 5
-  direction: {x: 1, y: 0}
+  _speed: 2
+  _timer: 0
+  _moveDuration: 5
+  _direction: {x: 1, y: 0}
 --- !u!1 &1722861163
 GameObject:
   m_ObjectHideFlags: 0

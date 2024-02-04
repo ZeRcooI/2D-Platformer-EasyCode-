@@ -3,40 +3,40 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 10f;
-    public float jumpforce = 8f;
+    [SerializeField] private float _speed = 10f;
+    [SerializeField] private float _jumpforce = 8f;
 
-    Rigidbody2D rigidbody2d;
-    public Animator animator;
-    public SpriteRenderer sprite;
+    private Rigidbody2D rigidbody2d;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private SpriteRenderer _sprite;
 
     [SerializeField] private GameObject _restartButton;
 
-    void Start()
+    private void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void Update()
     {
         // Объединенное условие для проверки нажатия клавиши A или D
         bool isMoving = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D);
 
         // Установка анимации в зависимости от того, идет ли игрок влево или вправо
-        animator.SetBool("isRuning", isMoving);
+        _animator.SetBool("isRuning", isMoving);
 
         // Перемещение игрока влево или вправо
         if (isMoving)
         {
             if (Input.GetKey(KeyCode.A))
             {
-                sprite.flipX = true;
-                transform.Translate(speed * Time.deltaTime * Vector2.left);
+                _sprite.flipX = true;
+                transform.Translate(_speed * Time.deltaTime * Vector2.left);
             }
             else if (Input.GetKey(KeyCode.D))
             {
-                sprite.flipX = false;
-                transform.Translate(speed * Time.deltaTime * Vector2.right);
+                _sprite.flipX = false;
+                transform.Translate(_speed * Time.deltaTime * Vector2.right);
             }
         }
 
@@ -69,11 +69,18 @@ public class PlayerController : MonoBehaviour
         //можем настроить гравитацию для нормального прыжка
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, jumpforce);
+            rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, _jumpforce);
         }
     }
 
-    private void OnDestroy()
+    //private void OnDestroy()
+    //{
+    //    if (_restartButton != null)
+    //    {
+    //        _restartButton.SetActive(true);
+    //    }
+    //}
+    private void OnDisable()
     {
         if (_restartButton != null)
         {
