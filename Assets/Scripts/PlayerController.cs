@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private GameObject _restartButton;
 
+    private bool _canJump = true;//дополнительно
+
     private void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
@@ -67,9 +69,19 @@ public class PlayerController : MonoBehaviour
 
         //GetKeyDown - это метод, который можно использовать для определения, была ли нажата клавиша на клавиатуре в данный момент времени.
         //можем настроить гравитацию для нормального прыжка
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && _canJump)
         {
             rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, _jumpforce);
+            _canJump = false;// запрещаем ещё раз прыгать
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // При соприкосновении с землей снова разрешаем прыжок
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            _canJump = true;
         }
     }
 
