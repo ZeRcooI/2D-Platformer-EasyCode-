@@ -2,7 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
-{
+{  
     [SerializeField] private float _speed = 10f;
     [SerializeField] private float _jumpforce = 8f;
 
